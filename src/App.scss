@@ -1,0 +1,20 @@
+.App {
+  background-color: wheat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+
+  >.buttons {
+    display: flex;
+    gap: 20px;
+
+    >button {
+      padding: 10px 20px;
+    }
+  }
+}
