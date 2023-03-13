@@ -1,8 +1,7 @@
 import "./App.scss";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import Widget from "./components/Widget/Widget";
-import { WidgetContext } from ".";
 
 const wsUrl = "ws://localhost:8025/live";
 const token = "3DeTfKiLaq&I$6NcDdX73s%q";
@@ -11,7 +10,6 @@ const keyId = "3c7e75f1-23de-44ef-bf33-f91b475ede35";
 function App() {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [volumePreasureData, setVolumePreasureData] = useState({});
-    const widgetContext = useContext(WidgetContext);
 
     const { sendJsonMessage, readyState } = useWebSocket(wsUrl, {
         onOpen: () => {
@@ -26,13 +24,13 @@ function App() {
             }
             if (response.keyId === keyId) {
                 setVolumePreasureData(response.data);
-                widgetContext.isOpen = true;
             }
         },
         shouldReconnect: (closeEvent) => true,
         onClose: () => {
             console.log("closed");
             setIsAuthorized(false);
+            setVolumePreasureData({});
         },
     });
 

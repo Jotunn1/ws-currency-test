@@ -6,7 +6,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    transition: transform .5s ease;
 
     &.closed {
         transform: translateX(100%);
@@ -14,7 +17,6 @@
 
     &.open {
         transform: translateX(0);
-
     }
 
     h6,
@@ -105,5 +107,30 @@
                 }
             }
         }
+    }
+
+    >.open-btn {
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        width: 32px;
+        height: 32px;
+        background-image: url(../../assets/images/arrow-left.png);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        transition: opacity .3s;
+
+        &.hide {
+            opacity: 0;
+        }
+
+        &.show {
+            opacity: 1;
+        }
+
+
     }
 }

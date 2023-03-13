@@ -1,20 +1,17 @@
-import { useContext } from "react";
-import { WidgetContext } from "../index.js";
-
-const WidgetButtons = () => {
-    const widgetContext = useContext(WidgetContext);
-
-    const muteClickHandler = () =>
-        (widgetContext.isMuted = !widgetContext.isMuted);
-
-    const closeClickHandler = () =>
-        (widgetContext.isOpen = !widgetContext.isOpen);
+const WidgetButtons = ({
+    isWidgetMuted,
+    setIsWidgetMuted,
+    isWidgetOpen,
+    setIsWidgetOpen,
+}) => {
+    const muteClickHandler = () => setIsWidgetMuted(!isWidgetMuted);
+    const closeClickHandler = () => setIsWidgetOpen(!isWidgetOpen);
 
     return (
         <div className="buttons">
             <button
                 onClick={muteClickHandler}
-                className={widgetContext.isMuted ? "muted" : "unmuted"}
+                className={isWidgetMuted ? "muted" : "unmuted"}
             >
                 <svg
                     width="20px"
