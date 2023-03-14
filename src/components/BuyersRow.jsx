@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const BuyersRow = ({ maxValue, buyers, buyEstimate, threshold }) => {
     return (
         <>
@@ -5,7 +7,7 @@ const BuyersRow = ({ maxValue, buyers, buyEstimate, threshold }) => {
                 <p>Buyers </p>
                 <p>{maxValue}</p>
             </div>
-            <div className="progress-bar buyers-progress">
+            <div className="progress-bar buyers-progress">  
                 <p>{buyers}</p>
                 <div
                     className="active"
@@ -22,4 +24,4 @@ const BuyersRow = ({ maxValue, buyers, buyEstimate, threshold }) => {
     );
 };
 
-export default BuyersRow;
+export default memo(BuyersRow);

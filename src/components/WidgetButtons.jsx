@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const WidgetButtons = ({
     isWidgetMuted,
     setIsWidgetMuted,
@@ -53,4 +55,4 @@ const WidgetButtons = ({
     );
 };
 
-export default WidgetButtons;
+export default memo(WidgetButtons);

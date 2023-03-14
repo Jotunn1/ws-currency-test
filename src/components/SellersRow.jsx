@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const SellersRow = ({ maxValue, sellers, sellEstimate, threshold }) => {
     return (
         <>
@@ -22,4 +24,4 @@ const SellersRow = ({ maxValue, sellers, sellEstimate, threshold }) => {
     );
 };
 
-export default SellersRow;
+export default memo(SellersRow);
