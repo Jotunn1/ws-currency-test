@@ -13,7 +13,6 @@ function App() {
 
     const { sendJsonMessage, readyState } = useWebSocket(wsUrl, {
         onOpen: () => {
-            console.log("opened");
             sendJsonMessage({ type: "AUTH", token: token });
         },
         onMessage: (message) => {
@@ -23,12 +22,11 @@ function App() {
                 setIsAuthorized(true);
             }
             if (response.keyId === keyId) {
-                setVolumePreasureData(response.data);
+                setVolumePreasureData(dataMapper(response.data));
             }
         },
         shouldReconnect: (closeEvent) => true,
         onClose: () => {
-            console.log("closed");
             setIsAuthorized(false);
             setVolumePreasureData({});
         },
@@ -51,16 +49,27 @@ function App() {
         sendJsonMessage(subscribeMessage);
     }, [sendJsonMessage]);
 
-    const unsubscribeToDataFlow = useCallback(() => {
+    const unsubscribeFromDataFlow = useCallback(() => {
         const unsubscribeMessage = {
             type: "UNSUBSCRIBE",
             keyId: keyId,
-            isSubscribe: true,
+            isSubscribe: false,
         };
         sendJsonMessage(unsubscribeMessage);
     }, [sendJsonMessage]);
 
     const isObjEmpty = (objName) => Object.keys(objName).length !== 0;
+
+    const dataMapper = (data) => {
+        const formated = {
+            max: Math.round(data.max),
+            sellers: Math.round(data.sell),
+            sellEstimate: Math.round(data.sellEstimate * 100),
+            buyers: Math.round(data.buy),
+            buyEstimate: Math.round(data.buyEstimate * 100),
+        };
+        return formated;
+    };
 
     return (
         <div className="App">
@@ -73,7 +82,7 @@ function App() {
                     Subscribe
                 </button>
                 <button
-                    onClick={unsubscribeToDataFlow}
+                    onClick={unsubscribeFromDataFlow}
                     disabled={!isAuthorized}
                 >
                     unsubscribe

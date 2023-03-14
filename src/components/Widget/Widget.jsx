@@ -1,5 +1,6 @@
 import { useState } from "react";
 import BuyersRow from "../BuyersRow";
+import OpenWidgetBtn from "../OpenWidgetBtn";
 import SellersRow from "../SellersRow";
 import WidgetButtons from "../WidgetButtons";
 import "./widget.scss";
@@ -8,22 +9,20 @@ const Widget = ({ widgetData }) => {
     const [isWidgetMuted, setIsWidgetMuted] = useState(false);
     const [isWidgetOpen, setIsWidgetOpen] = useState(true);
     const threshold = 70;
-    const fixedSellEstimate = (widgetData.sellEstimate * 100).toFixed();
-    const fixedBuyEstimate = (widgetData.buyEstimate * 100).toFixed();
 
     return (
         <div className={`widget ${isWidgetOpen ? "open" : "closed"}`}>
             <h6>Currency name</h6>
             <SellersRow
-                maxValue={widgetData.max.toFixed()}
-                sellers={widgetData.sell.toFixed()}
-                sellEstimate={fixedSellEstimate}
+                maxValue={widgetData.max}
+                sellers={widgetData.sellers}
+                sellEstimate={widgetData.sellEstimate}
                 threshold={threshold}
             />
             <BuyersRow
-                maxValue={widgetData.max.toFixed()}
-                buyers={widgetData.buy.toFixed()}
-                buyEstimate={fixedBuyEstimate}
+                maxValue={widgetData.max}
+                buyers={widgetData.buyers}
+                buyEstimate={widgetData.buyEstimate}
                 threshold={threshold}
             />
             <WidgetButtons
@@ -32,10 +31,10 @@ const Widget = ({ widgetData }) => {
                 isWidgetMuted={isWidgetMuted}
                 setIsWidgetMuted={setIsWidgetMuted}
             />
-            <button
-                className={`open-btn ${isWidgetOpen ? "hide" : "show"}`}
-                onClick={() => setIsWidgetOpen(true)}
-            ></button>
+            <OpenWidgetBtn
+                isWidgetOpen={isWidgetOpen}
+                setIsWidgetOpen={setIsWidgetOpen}
+            />
         </div>
     );
 };
