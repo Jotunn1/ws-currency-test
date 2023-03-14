@@ -1,20 +1,48 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
 .App {
-  background-color: wheat;
+  background-color: #f5eec2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
   justify-content: center;
+  gap: 20px;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #416a59;
 
   >.buttons {
     display: flex;
     gap: 20px;
 
     >button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      border-radius: 25px;
+      background-color: #73a24e;
+      font-family: 'Poppins', sans-serif;
       padding: 10px 20px;
+      color: #fff;
+      transition: .2s ease-in;
+      transition-property: background-color, filter, transform;
+
+      &:hover {
+        background-color: #a9c25d;
+      }
+
+      &:active {
+        transform: scaleX(1.04);
+      }
+
+      &:disabled {
+        pointer-events: none;
+        cursor: default;
+        filter: grayscale(100%) blur(2px);
+      }
     }
   }
 }

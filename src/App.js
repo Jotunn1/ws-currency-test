@@ -58,8 +58,6 @@ function App() {
         sendJsonMessage(unsubscribeMessage);
     }, [sendJsonMessage]);
 
-    const isObjEmpty = (objName) => Object.keys(objName).length !== 0;
-
     const dataMapper = (data) => {
         const formated = {
             max: Math.round(data.max),
@@ -70,6 +68,8 @@ function App() {
         };
         return formated;
     };
+
+    const isObjEmpty = (objName) => Object.keys(objName).length !== 0;
 
     return (
         <div className="App">
@@ -85,7 +85,7 @@ function App() {
                     onClick={unsubscribeFromDataFlow}
                     disabled={!isAuthorized}
                 >
-                    unsubscribe
+                    Unsubscribe
                 </button>
             </div>
         </div>
